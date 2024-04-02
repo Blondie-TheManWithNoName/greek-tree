@@ -1,0 +1,30 @@
+.godArticle {
+  width: 50%;
+}
+
+.godArticleHeader {
+  display: flex;
+  justify-content: center;
+
+  padding-bottom: 0.5rem;
+}
+.nameContainer {
+  padding-inline: 1rem;
+}
+
+.nameContainer > p:first-child {
+  display: inline-block;
+  font-size: small;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.nameContainer > p:nth-child(2) {
+  display: inline-block;
+  font-size: small;
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+}
+
+.nameDescription {
+  text-align: justify;
+}

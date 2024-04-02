@@ -1,0 +1,42 @@
+.dot {
+  position: absolute;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  cursor: pointer;
+  border: 0.1rem solid #ccc;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 7rem;
+  height: 2.15rem;
+  transition: all 500ms ease-out;
+}
+
+.dot:hover {
+  background-color: #ccc;
+}
+
+.check:checked ~ .dot {
+  background-color: #ccc;
+}
+
+.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.deactive {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.check {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.godPartnerOut {
+}

@@ -1,0 +1,60 @@
+* {
+  transition: all 250ms ease-in-out;
+}
+
+.info {
+  position: relative;
+  /* height: 50vh; */
+  height: 36vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.god {
+  position: relative;
+  /* background-color: rgba(102, 51, 153, 0.2); */
+  width: 50vh;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+}
+
+.partners {
+  position: relative;
+  width: 36vh;
+  height: inherit;
+  /* rotate: -16deg; */
+}
+
+.children {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: inherit;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+/* .infoParents,
+.infoChildren {
+  grid-column: 1 / 4;
+}
+
+.infoGod,
+.infoRelatives {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoChildren {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+} */
