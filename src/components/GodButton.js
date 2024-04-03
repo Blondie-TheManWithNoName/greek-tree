@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { styleBtn } from "./utils.js";
 
 const GodButton = ({
+  key,
   name,
   style,
   isActive,
@@ -14,6 +15,10 @@ const GodButton = ({
 }) => {
   const [selectedButton, setSelectedButton] = useState(isSelected);
 
+  useEffect(() => {
+    setSelectedButton(isSelected);
+  }, [isSelected]);
+
   const handleSelect = () => {
     setSelectedButton(!selectedButton);
     handleClick(index, total, name);
@@ -21,10 +26,10 @@ const GodButton = ({
 
   return (
     <>
-      <label htmlFor={name}>
+      <label htmlFor={key}>
         <input
           type="checkbox"
-          id={name}
+          id={key}
           className={Style.check}
           onChange={handleSelect}
           checked={selectedButton}
