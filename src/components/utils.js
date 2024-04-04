@@ -37,6 +37,7 @@ export const styleBtn = {
       left: `calc(${x}% - 3.5rem)`,
       top: `calc(${y}% - 1rem)`,
       rotate: `${angle}rad`,
+      zIndex: "2",
     };
   },
   godChild: (index, total, shift) => {

@@ -20,15 +20,22 @@ export const fetchGodPartners = async (name, setGodPartners) => {
   }
 };
 
-export const fetchGodParents = async (name, setParents) => {
+export const fetchGodParents = async (name, parents, setParents) => {
   try {
     const response = await axios.get(
       "http://127.0.0.1:4005/api/gods/parents/" + name
     );
-    setParents({
-      parent1: response.data[0].parent1,
-      parent2: response.data[0].parent2,
-    });
+    if (
+      !(
+        parents.parent1 === response.data[0].parent1 &&
+        parents.parent2 === response.data[0].parent2
+      )
+    ) {
+      setParents({
+        parent1: response.data[0].parent1,
+        parent2: response.data[0].parent2,
+      });
+    }
   } catch (error) {
     // setError(error.message);
   }

@@ -15,13 +15,13 @@ function App() {
       <header className={Style.Header}></header>
       <main className={Style.Main}>
         <GodInfo p1="Kronos" p2="Rhea" shift={0} setGodStatus={setGodStatus} />
-        <GodInfo
+        {/* <GodInfo
           p1={godStatus.p1}
           p2={godStatus.p2}
           desc={godStatus.desc}
           shift={0}
           setGodStatus={setGodStatus}
-        />
+        /> */}
         {/* <GodInfo /> */}
       </main>
     </div>
