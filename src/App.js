@@ -10,12 +10,6 @@ function App() {
     desc: false,
   });
 
-  useEffect(() => {
-    // This effect will trigger whenever godStatus changes
-    // You can add any logic you want to execute when godStatus changes here
-    // For now, we just log the new godStatus for demonstration purposes
-    console.log("New godStatus:", godStatus);
-  }, [godStatus]);
   return (
     <div className={Style.App}>
       <header className={Style.Header}></header>

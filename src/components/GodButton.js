@@ -8,7 +8,6 @@ const GodButton = ({
   style,
   isActive,
   handleClick,
-  twoSelected,
   index,
   total,
   isSelected,
