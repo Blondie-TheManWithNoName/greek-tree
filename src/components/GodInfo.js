@@ -21,6 +21,7 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
   // If only one is selected its alwasy 1 and 2 is null then
   const [selected, setSelected] = useState({
     godSelected1: null,
+    index1: null,
     godSelected2: null,
   });
 
@@ -53,21 +54,35 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
   // }, [p1, p2]);
 
   useEffect(() => {
-    console.log("selected");
-    if (selected.godSelected2 === null) {
-      if (selected.godSelected1 === null) setShiftChildren(0);
-      else {
-        fetchGodParents(selected.godSelected1, parents, setParents);
-        fetchGodPartners(selected.godSelected1, setGodPartners);
+    console.log("godsChildren", godsChildren);
+  }, [godsChildren]);
 
-        const newIndex = godsChildren?.findIndex(
-          (element) => element === selected.godSelected1
-        );
-        setShiftChildren(
-          3.5 +
-            newIndex * 9 -
-            (godsChildren?.length * 7 + (godsChildren?.length - 1) * 2) / 2
-        );
+  useEffect(() => {
+    console.log("parents", parents);
+  }, [parents]);
+
+  useEffect(() => {
+    console.log("godPartners", godPartners);
+  }, [godPartners]);
+
+  useEffect(() => {
+    console.log("selected", selected);
+  }, [selected]);
+
+  useEffect(() => {
+    if (selected.godSelected2 === null) {
+      if (selected.godSelected1 === null) {
+        setGodPartners(null);
+        setShiftChildren(0);
+      } else {
+        fetchGodPartners(selected.godSelected1, setGodPartners);
+        if (selected.index1 !== null) {
+          setShiftChildren(
+            3.5 +
+              selected.index1 * 9 -
+              (godsChildren?.length * 7 + (godsChildren?.length - 1) * 2) / 2
+          );
+        }
       }
       setGodStatus({ desc: !activeChildren });
     } else {
@@ -79,30 +94,30 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
     }
   }, [selected]);
   useEffect(() => {
-    console.log("parents");
+    // console.log("parents");
     fetchGodInfo(parents.parent1, parents.parent2, setGodsChildren);
   }, [parents]);
 
   useEffect(() => {
-    console.log("godChildren");
-    if (selected.godSelected1 !== null) {
-      // const newIndex = godsChildren?.findIndex(
-      //   (element) => element === selected.godSelected1
-      // );
-      // setShiftChildren(
-      //   3.5 +
-      //     newIndex * 9 -
-      //     (godsChildren?.length * 7 + (godsChildren?.length - 1) * 2) / 2
-      // );
-    }
+    // console.log("godChildren", selected.godSelected1, selected.godSelected2);
+    // if (selected.godSelected1 !== null && godsChildren !== null) {
+    //   const newIndex = godsChildren?.findIndex(
+    //     (element) => element === selected.godSelected1
+    //   );
+    //   setShiftChildren(
+    //     3.5 +
+    //       newIndex * 9 -
+    //       (godsChildren?.length * 7 + (godsChildren?.length - 1) * 2) / 2
+    //   );
+    // }
   }, [godsChildren]);
 
   useEffect(() => {
-    fetchGodInfo("prevPartner", prevPartner);
+    // fetchGodInfo("prevPartner", prevPartner);
   }, [prevPartner]);
 
   useEffect(() => {
-    if (prevPartner !== null) {
+    if (prevPartner !== null && godPartners !== null) {
       const newIndex = godPartners.partners?.findIndex(
         (element) => element === prevPartner
       );
@@ -111,70 +126,84 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
   }, [godPartners]);
 
   const onClickChild = (index) => {
-    if (godsChildren[index] === selected.godSelected1)
-      setSelected({ godSelected1: null, godSelected2: null });
-    else setSelected({ godSelected1: godsChildren[index], godSelected2: null });
+    setSelected({
+      godSelected1: godsChildren[index],
+      index1: index,
+      godSelected2: null,
+    });
 
-    setActiveChildren(!activeChildren);
+    // setActiveChildren(!activeChildren);
 
     if (activePartners) {
-      setActivePartners(!activePartners);
+      // setActivePartners(!activePartners);
     } else {
-      setTimeout(() => {
-        setActivePartners(!activePartners);
-      }, 500);
+      // setTimeout(() => {
+      // setActivePartners(!activePartners);
+      // }, 500);
     }
+  };
+
+  const onClickMain = (index) => {
+    setSelected({ godSelected1: null, godSelected2: null, index1: null });
+    // setActivePartners(!activePartners);
   };
 
   const onClickPartner = (index) => {
     setPrevPartner(null);
-
     setParentsAnimation([true, index]);
-    setTimeout(() => {
-      if (
-        (index % 2 === 0 && !mirrorPartners) ||
-        (index % 2 !== 0 && mirrorPartners)
-      ) {
-        setSelected({
-          godSelected2: selected.godSelected1,
-          godSelected1: godPartners.partners[index],
-        });
-      } else {
-        setSelected({
-          godSelected2: godPartners.partners[index],
-          godSelected1: selected.godSelected1,
-        });
-      }
-    }, 500);
+    // setTimeout(() => {
+    if (
+      (index % 2 === 0 && !mirrorPartners) ||
+      (index % 2 !== 0 && mirrorPartners)
+    ) {
+      setSelected({
+        godSelected2: selected.godSelected1,
+        godSelected1: godPartners.partners[index],
+        index1: index,
+      });
+    } else {
+      setSelected({
+        godSelected2: godPartners.partners[index],
+        godSelected1: selected.godSelected1,
+        index1: selected.index1,
+      });
+      setGodsChildren(null);
+    }
+    // }, 500);
 
     // Hide rest of the partners
     setActivePartners(!activePartners);
   };
 
   const onClickParent = (index, name) => {
+    fetchGodInfo(parents.parent1, parents.parent2, setGodsChildren);
+    fetchGodParents(selected.godSelected1, parents, setParents);
+
     setMirrorPartners(false);
     if (name === selected.godSelected1) {
       setSelected({
         godSelected2: null,
         godSelected1: selected.godSelected2,
+        index1: null,
       });
     } else {
       setPrevPartner(name);
       setSelected({
         godSelected2: null,
         godSelected1: selected.godSelected1,
+        index1: null,
       });
     }
     // setParentsAnimation([true, 2]);
-    setTimeout(() => {
-      setParentsAnimation([false, index]);
-    }, 300);
+    // setTimeout(() => {
+    setParentsAnimation([false, index]);
+    // }, 300);
     setActivePartners(!activePartners);
   };
 
   return (
     <>
-      {godsChildren && (
+      {
         <>
           {desc ? (
             <div className={Style.info}>
@@ -205,72 +234,60 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
                   />
                 </div>
               ) : (
-                <div className={Style.info}>
-                  {godsChildren.map((child, index) => {
-                    return (
+                godsChildren && (
+                  <div className={Style.info}>
+                    {selected.godSelected1 === null ? (
+                      godsChildren.map((child, index) => {
+                        return (
+                          <GodButton
+                            key={child + "_child"}
+                            name={child}
+                            index={index}
+                            total={godsChildren.length}
+                            style={styleBtn.godChild(
+                              index,
+                              godsChildren.length,
+                              shiftChildren
+                            )}
+                            isActive={activeChildren}
+                            isSelected={child === selected.godSelected1}
+                            handleClick={onClickChild}
+                          />
+                        );
+                      })
+                    ) : (
                       <GodButton
-                        key={child + "_child"}
-                        name={child}
-                        index={index}
+                        key={selected.godSelected1 + "_main"}
+                        name={selected.godSelected1}
+                        index={0}
                         total={godsChildren.length}
-                        style={
-                          parentsAnimation[0] && child === selected.godSelected1
-                            ? true
-                              ? (parentsAnimation[1] % 2 === 0 &&
-                                  !mirrorPartners) ||
-                                (parentsAnimation[1] % 2 !== 0 &&
-                                  mirrorPartners)
-                                ? styleBtn.godParent(1)
-                                : styleBtn.godParent(0)
-                              : (index % 2 === 0 && !mirrorPartners) ||
-                                (index % 2 !== 0 && mirrorPartners)
-                              ? styleBtn.godParent(0)
-                              : styleBtn.godParent(1)
-                            : styleBtn.godChild(
-                                index,
-                                godsChildren.length,
-                                shiftChildren
-                              )
-                        }
+                        style={styleBtn.godMain}
                         isActive={activeChildren}
-                        isSelected={child === selected.godSelected1}
-                        handleClick={onClickChild}
+                        isSelected={true}
+                        handleClick={onClickMain}
                       />
-                    );
-                  })}
-                  <div className={Style.partners}>
-                    {godPartners?.partners.map((partner, index) => {
-                      // console.log(
-                      //   "prevPartner",
-                      //   prevPartner,
-                      //   "partner",
-                      //   partner
-                      // );
-                      return (
-                        <GodButton
-                          key={partner + "_partner"}
-                          name={partner}
-                          index={index}
-                          isActive={activePartners || partner === prevPartner}
-                          handleClick={onClickPartner}
-                          style={
-                            parentsAnimation[0] && parentsAnimation[1] === index
-                              ? (index % 2 === 0 && !mirrorPartners) ||
-                                (index % 2 !== 0 && mirrorPartners)
-                                ? styleBtn.godParent(0)
-                                : styleBtn.godParent(1)
-                              : styleBtn.godPartner(index, mirrorPartners)
-                          }
-                        />
-                      );
-                    })}
+                    )}
+                    <div className={Style.partners}>
+                      {godPartners?.partners.map((partner, index) => {
+                        return (
+                          <GodButton
+                            key={partner + "_partner"}
+                            name={partner}
+                            index={index}
+                            isActive={activePartners}
+                            handleClick={onClickPartner}
+                            style={styleBtn.godPartner(index, mirrorPartners)}
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
+                )
               )}
             </>
           )}
         </>
-      )}
+      }
     </>
   );
 };
