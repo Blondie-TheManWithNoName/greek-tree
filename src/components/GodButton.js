@@ -1,6 +1,5 @@
 import Style from "./GodButton.module.css";
 import React, { useEffect, useState } from "react";
-import { styleBtn } from "./utils.js";
 
 const GodButton = ({
   key,
@@ -9,7 +8,6 @@ const GodButton = ({
   isActive,
   handleClick,
   index,
-  total,
   isSelected,
 }) => {
   const [selectedButton, setSelectedButton] = useState(isSelected);
@@ -20,7 +18,7 @@ const GodButton = ({
 
   const handleSelect = () => {
     setSelectedButton(!selectedButton);
-    handleClick(index, total, name);
+    handleClick(index, name);
   };
 
   return (
