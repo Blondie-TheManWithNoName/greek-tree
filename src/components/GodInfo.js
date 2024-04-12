@@ -9,7 +9,16 @@ import {
   fetchGodParents,
 } from "./fetchInfo.js";
 
-const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
+const GodInfo = ({
+  p1,
+  p2,
+  s1,
+  s2,
+  desc,
+  shift,
+  setGodStatus,
+  setChildClick,
+}) => {
   // const [error, setError] = useState(null); TO DO
 
   // Stores parents of current children or selected god
@@ -17,6 +26,21 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
     parent1: p1,
     parent2: p2,
   });
+
+  useEffect(() => {
+    setParents({
+      parent1: p1,
+      parent2: p2,
+    });
+  }, [p1, p2]);
+
+  useEffect(() => {
+    setSelected({
+      godSelected1: s1,
+      godSelected2: s2,
+    });
+  }, [s1, s2]);
+
   // Tells current selected god/s
   // If only one is selected its alwasy 1 and 2 is null then
   const [selected, setSelected] = useState({
@@ -39,69 +63,64 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
       if (selected.godSelected1 === null) {
         setGodPartners(null);
       } else {
+        console.log("AS");
         fetchGodPartners(selected.godSelected1, setGodPartners);
 
-        if (prevPartner !== null)
+        if (prevPartner.name !== null)
           fetchGodParents(selected.godSelected1, parents, setParents);
       }
-    } else {
-      setGodStatus({
-        p1: selected.godSelected1,
-        p2: selected.godSelected2,
-        desc: false,
-      });
     }
   }, [selected]);
   useEffect(() => {
+    console.log("FETCH", parents.parent1, parents.parent2);
     fetchGodInfo(parents.parent1, parents.parent2, setGodsChildren);
   }, [parents]);
 
   useEffect(() => {
-    console.log("prevPartner", prevPartner);
-    // if (prevPartner !== null) {
-    // setMirrorPartners(prevPartner.right);
-    // } else setMirrorPartners(false);
-  }, [prevPartner]);
-
-  useEffect(() => {
-    console.log("godPartners");
-    if (prevPartner !== null && godPartners !== null) {
+    if (prevPartner.name !== null && godPartners !== null) {
       const newIndex = godPartners.partners?.findIndex(
         (element) => element === prevPartner.name
       );
-      console.log("newIndex", newIndex);
       if (prevPartner.right) {
-        if (newIndex % 2 === 0) setMirrorPartners(true);
-        else setMirrorPartners(false);
+        newIndex % 2 === 0 ? setMirrorPartners(true) : setMirrorPartners(false);
       } else {
-        if (newIndex % 2 === 0) setMirrorPartners(false);
-        else setMirrorPartners(true);
+        newIndex % 2 === 0 ? setMirrorPartners(false) : setMirrorPartners(true);
       }
     }
   }, [godPartners]);
 
   const onClickChild = (index) => {
+    setChildClick(godsChildren[index]);
     setSelected({
       godSelected1: godsChildren[index],
       godSelected2: null,
     });
+    setGodStatus({ p1: null, p2: null, desc: true, s1: null, s2: null });
   };
 
   const onClickMain = (index) => {
+    setPrevPartner({ name: null, right: false });
+    // setMirrorPartners(false);
     setSelected({ godSelected1: null, godSelected2: null });
+    setGodStatus({ p1: null, p2: null, desc: false, s1: null, s2: null });
   };
 
   const onClickPartner = (index) => {
-    setPrevPartner(null);
+    setGodStatus({
+      p1: godPartners.partners[index],
+      p2: selected.godSelected1,
+      desc: false,
+      s1: godPartners.partners[index],
+      s2: selected.godSelected1,
+    });
+
     if (mirrorPartners) {
       if (index % 2 === 0) {
-        console.log("1");
         setSelected({
           godSelected2: godPartners.partners[index],
           godSelected1: selected.godSelected1,
         });
       } else {
-        console.log("2");
         setSelected({
           godSelected2: selected.godSelected1,
           godSelected1: godPartners.partners[index],
@@ -109,13 +128,11 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
       }
     } else {
       if (index % 2 === 0) {
-        console.log("1!");
         setSelected({
           godSelected2: selected.godSelected1,
           godSelected1: godPartners.partners[index],
         });
       } else {
-        console.log("2!");
         setSelected({
           godSelected2: godPartners.partners[index],
           godSelected1: selected.godSelected1,
@@ -127,9 +144,8 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
 
   const onClickParent = (index, name) => {
     // fetchGodInfo(parents.parent1, parents.parent2, setGodsChildren);
-    console.log("name", name);
-    console.log("selected.godSelected1", selected.godSelected1);
-    console.log("selected.godSelected2", selected.godSelected2);
+    setGodStatus({ p1: null, p2: null, desc: true, s1: null, s2: null });
+
     if (name === selected.godSelected1) {
       setPrevPartner({ name: name, right: false });
       setSelected({
@@ -180,24 +196,23 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
               ) : (
                 godsChildren && (
                   <div className={Style.info}>
+                    {console.log("godsChildren", godsChildren)}
                     {selected.godSelected1 === null ? (
-                      godsChildren.map((child, index) => {
-                        return (
-                          <GodButton
-                            key={child + "_child"}
-                            name={child}
-                            index={index}
-                            total={godsChildren.length}
-                            style={styleBtn.godChild(
-                              index,
-                              godsChildren.length,
-                              0
-                            )}
-                            isSelected={child === selected.godSelected1}
-                            handleClick={onClickChild}
-                          />
-                        );
-                      })
+                      godsChildren.map((child, index) => (
+                        <GodButton
+                          key={child + "_child"}
+                          name={child}
+                          index={index}
+                          total={godsChildren.length}
+                          style={styleBtn.godChild(
+                            index,
+                            godsChildren.length,
+                            0
+                          )}
+                          isSelected={child === selected.godSelected1}
+                          handleClick={onClickChild}
+                        />
+                      ))
                     ) : (
                       <GodButton
                         key={selected.godSelected1 + "_main"}
@@ -210,17 +225,15 @@ const GodInfo = ({ p1, p2, desc, shift, setGodStatus }) => {
                       />
                     )}
                     <div className={Style.partners}>
-                      {godPartners?.partners.map((partner, index) => {
-                        return (
-                          <GodButton
-                            key={partner + "_partner"}
-                            name={partner}
-                            index={index}
-                            handleClick={onClickPartner}
-                            style={styleBtn.godPartner(index, mirrorPartners)}
-                          />
-                        );
-                      })}
+                      {godPartners?.partners.map((partner, index) => (
+                        <GodButton
+                          key={partner + "_partner"}
+                          name={partner}
+                          index={index}
+                          handleClick={onClickPartner}
+                          style={styleBtn.godPartner(index, mirrorPartners)}
+                        />
+                      ))}
                     </div>
                   </div>
                 )
