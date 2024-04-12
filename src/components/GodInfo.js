@@ -18,6 +18,7 @@ const GodInfo = ({
   shift,
   setGodStatus,
   setChildClick,
+  setMainClick,
 }) => {
   // const [error, setError] = useState(null); TO DO
 
@@ -72,7 +73,6 @@ const GodInfo = ({
     }
   }, [selected]);
   useEffect(() => {
-    console.log("FETCH", parents.parent1, parents.parent2);
     fetchGodInfo(parents.parent1, parents.parent2, setGodsChildren);
   }, [parents]);
 
@@ -90,15 +90,17 @@ const GodInfo = ({
   }, [godPartners]);
 
   const onClickChild = (index) => {
-    setChildClick(godsChildren[index]);
-    setSelected({
-      godSelected1: godsChildren[index],
-      godSelected2: null,
-    });
+    // setSelected({
+    //   godSelected1: null,
+    //   godSelected2: null,
+    // });
+    setChildClick({ child: godsChildren[index], parents: parents });
     setGodStatus({ p1: null, p2: null, desc: true, s1: null, s2: null });
   };
 
   const onClickMain = (index) => {
+    setMainClick(parents);
+
     setPrevPartner({ name: null, right: false });
     // setMirrorPartners(false);
     setSelected({ godSelected1: null, godSelected2: null });
@@ -110,8 +112,8 @@ const GodInfo = ({
       p1: godPartners.partners[index],
       p2: selected.godSelected1,
       desc: false,
-      s1: godPartners.partners[index],
-      s2: selected.godSelected1,
+      s1: null,
+      s2: null,
     });
 
     if (mirrorPartners) {
