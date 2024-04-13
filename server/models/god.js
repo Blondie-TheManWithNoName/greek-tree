@@ -42,8 +42,12 @@ module.exports = (sequelize, DataTypes) => {
 
   God.init(
     {
-      name: { type: DataTypes.STRING, allowNull: false, unique: true },
-      primaryKey: true,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        primaryKey: true,
+      },
       greek_name: { type: DataTypes.STRING },
       roman_name: { type: DataTypes.STRING },
       translation_name: { type: DataTypes.STRING },

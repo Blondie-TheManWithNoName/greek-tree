@@ -85,7 +85,14 @@ gods.get("/children/:p1&:p2", async (req, res) => {
 gods.get("/:name", async (req, res) => {
   const godName = req.params.name;
   const god = await God.findOne({
-    attributes: ["name"],
+    attributes: [
+      "name",
+      "greek_name",
+      "roman_name",
+      "translation_name",
+      "gender",
+      "description",
+    ],
     where: { name: godName },
   });
 
@@ -162,7 +169,7 @@ gods.get("/:name", async (req, res) => {
   // );
 
   return res.status(200).json({
-    god: god.name,
+    god: god,
     // parentsNames,
     partners: partnerNames,
   });

@@ -153,28 +153,70 @@ module.exports = {
         // { name: "Phoibe", gender: true },
         // { name: "Koios", gender: false },
 
-        { name: "Rhea", gender: true },
-        { name: "Kronos", gender: false },
+        // { name: "Rhea", gender: true },
+        // { name: "Kronos", gender: false },
 
-        { name: "Hestia", gender: true },
-        { name: "Demeter", gender: true },
-        { name: "Hera", gender: true },
-        { name: "Hades", gender: true },
-        { name: "Poseidon", gender: false },
-        { name: "Zeus", gender: false },
+        {
+          name: "Hestia",
+          gender: true,
+          greek_name: "Ἑστια",
+          roman_name: "Vesta",
+          translation_name: "Hearth",
+          description:
+            "HESTIA was the virgin goddess of the hearth (both private and municipal) and the home. As the goddess of the family hearth she also presided over the cooking of bread and the preparation of the family meal. Hestia was also the goddess of the sacrificial flame and received a share of every sacrifice to the gods. The cooking of the communal feast of sacrificial meat was naturally a part of her domain.",
+        },
+        {
+          name: "Demeter",
+          gender: true,
+          greek_name: "Δημητηρ",
+          roman_name: "Demeter",
+          translation_name: "Ceres",
+          description:
+            "DEMETER was the Olympian goddess of agriculture, grain and bread who sustained mankind with the earth's rich bounty. She presided over the foremost of the Mystery Cults which promised its intiates the path to a blessed afterlife in the realm of Elysium. Demeter was depicted as a mature woman, often wearing a crown and bearing sheafs of wheat or a cornucopia (horn of plenty), and a torch.",
+        },
+        // { name: "Hera", gender: true },
+        // { name: "Hades", gender: true },
+        // { name: "Poseidon", gender: false },
+        // { name: "Zeus", gender: false },
 
-        { name: "Iasion", gender: false },
-        { name: "Elektra", gender: true },
-        { name: "Carmanor", gender: false },
+        // { name: "Iasion", gender: false },
+        // { name: "Elektra", gender: true },
+        // { name: "Carmanor", gender: false },
 
-        { name: "Persephone", gender: false },
-        { name: "Plutus", gender: false },
-        { name: "Philomelus", gender: false },
+        // { name: "Persephone", gender: false },
+        // { name: "Plutus", gender: false },
+        // { name: "Philomelus", gender: false },
       ],
       {
-        ignoreDuplicates: true, // Specify the ignoreDuplicates option
+        ignoreDuplicates: true,
       }
     );
+
+    const updatedData = [
+      {
+        name: "Hestia",
+        gender: true,
+        greek_name: "Ἑστια",
+        roman_name: "Vesta",
+        translation_name: "Hearth",
+        description:
+          "HESTIA was the virgin goddess of the hearth (both private and municipal) and the home. As the goddess of the family hearth she also presided over the cooking of bread and the preparation of the family meal. Hestia was also the goddess of the sacrificial flame and received a share of every sacrifice to the gods. The cooking of the communal feast of sacrificial meat was naturally a part of her domain.",
+      },
+      {
+        name: "Demeter",
+        gender: true,
+        greek_name: "Δημητηρ",
+        roman_name: "Demeter",
+        translation_name: "Ceres",
+        description:
+          "DEMETER was the Olympian goddess of agriculture, grain and bread who sustained mankind with the earth's rich bounty. She presided over the foremost of the Mystery Cults which promised its intiates the path to a blessed afterlife in the realm of Elysium. Demeter was depicted as a mature woman, often wearing a crown and bearing sheafs of wheat or a cornucopia (horn of plenty), and a torch.",
+      },
+    ];
+
+    // Perform the bulk update for multiple gods
+    for (const data of updatedData) {
+      await queryInterface.bulkUpdate("gods", data, { name: data.name });
+    }
 
     // const godIds = insertedGods.map((god) => god.god);
 
