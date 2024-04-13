@@ -6,10 +6,38 @@
 
 .Header {
   height: 10vh;
-  background-color: #ccc;
+  /* background-color: #cfdee7; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Main {
   display: flex;
   flex-direction: column;
+}
+
+.Title {
+  color: #35465f;
+  font-size: 3rem;
+  letter-spacing: 0.75rem;
+  text-align: center;
+  justify-content: center;
+  font-family: Romanica;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.HandLeft {
+  scale: 0.2;
+  position: absolute;
+  right: 50%;
+  rotate: 2deg;
+}
+
+.HandRight {
+  scale: 0.2;
+  position: absolute;
+  left: 50%;
+  rotate: -3deg;
 }

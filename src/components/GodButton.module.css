@@ -3,22 +3,26 @@
   text-transform: uppercase;
   border-radius: 2rem;
   cursor: pointer;
-  border: 0.1rem solid #ccc;
+  border: 0.1rem solid #3d567b;
+  color: #3d567b;
   background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 7rem;
   height: 2.15rem;
+  font-weight: 500;
+
   transition: all 500ms ease-out;
 }
 
 .dot:hover {
-  background-color: #ccc;
+  background-color: #cfdee7;
 }
 
 .check:checked ~ .dot {
-  background-color: #ccc;
+  background-color: #4e617e;
+  color: #cfdee7;
 }
 
 .active {

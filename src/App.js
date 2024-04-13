@@ -3,6 +3,9 @@ import Style from "./App.module.css";
 import GodInfo from "./components/GodInfo";
 import { useState, useEffect } from "react";
 
+const handLeft = require("./assets/Hand-Left.svg").default;
+const handRight = require("./assets/Hand-Right.svg").default;
+
 function App() {
   const [godStatus1, setGodStatus1] = useState({
     p1: "Kronos",
@@ -72,7 +75,11 @@ function App() {
 
   return (
     <div className={Style.App}>
-      <header className={Style.Header}></header>
+      <header className={Style.Header}>
+        <img src={handLeft} alt="My SVG" className={Style.HandLeft} />
+        <img src={handRight} alt="My SVG" className={Style.HandRight} />
+        <h1 className={Style.Title}>GREEK FAMILY TREE</h1>
+      </header>
       <main className={Style.Main}>
         {/* <GodInfo p1="Kronos" p2="Rhea" shift={0} setGodStatus={setGodStatus} /> */}
         <GodInfo
