@@ -27,12 +27,12 @@ function App() {
   const [mainClick, setMainClick] = useState(null);
 
   useEffect(() => {
-    console.log("godStatus2", godStatus2);
+    // console.log("godStatus2", godStatus2);
   }, [godStatus2]);
 
   useEffect(() => {
     if (childClick.child !== null) {
-      console.log("childClick", childClick);
+      // console.log("childClick", childClick);
 
       setGodStatus1({
         p1: childClick.parents.parent1,
@@ -45,7 +45,7 @@ function App() {
       setGodStatus2({
         p1: null,
         p2: null,
-        s1: null,
+        s1: childClick.child,
         s2: null,
         desc: true,
       });
@@ -54,7 +54,7 @@ function App() {
 
   useEffect(() => {
     if (mainClick !== null) {
-      console.log("mainClick", mainClick);
+      // console.log("mainClick", mainClick);
       setGodStatus1({
         p1: mainClick.parent1,
         p2: mainClick.parent2,

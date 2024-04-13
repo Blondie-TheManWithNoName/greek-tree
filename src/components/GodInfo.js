@@ -5,6 +5,7 @@ import GodDescription from "./GodDescription";
 import { styleBtn } from "./utils.js";
 import {
   fetchGodInfo,
+  fetchGodChildren,
   fetchGodPartners,
   fetchGodParents,
 } from "./fetchInfo.js";
@@ -49,6 +50,11 @@ const GodInfo = ({
     godSelected2: null,
   });
 
+  // Stores array with the god information
+  const [godInfo, setGodInfo] = useState(null);
+  useEffect(() => {
+    console.log("godInfo", godInfo?.god);
+  }, [godInfo]);
   // Stores array with children of god p1 and p2
   const [godsChildren, setGodsChildren] = useState(null);
   // Stores array with partners of current selected god
@@ -64,8 +70,10 @@ const GodInfo = ({
       if (selected.godSelected1 === null) {
         setGodPartners(null);
       } else {
-        console.log("AS");
         fetchGodPartners(selected.godSelected1, setGodPartners);
+        console.log("DESC", desc);
+        console.log("selected.godSelected1", selected.godSelected1);
+        fetchGodInfo(selected.godSelected1, setGodInfo);
 
         if (prevPartner.name !== null)
           fetchGodParents(selected.godSelected1, parents, setParents);
@@ -73,7 +81,7 @@ const GodInfo = ({
     }
   }, [selected]);
   useEffect(() => {
-    fetchGodInfo(parents.parent1, parents.parent2, setGodsChildren);
+    fetchGodChildren(parents.parent1, parents.parent2, setGodsChildren);
   }, [parents]);
 
   useEffect(() => {
@@ -169,7 +177,7 @@ const GodInfo = ({
         <>
           {desc ? (
             <div className={Style.info}>
-              <GodDescription />
+              <GodDescription godInfo={godInfo?.god} />
             </div>
           ) : (
             <>
@@ -198,7 +206,7 @@ const GodInfo = ({
               ) : (
                 godsChildren && (
                   <div className={Style.info}>
-                    {console.log("godsChildren", godsChildren)}
+                    {/* {console.log("godsChildren", godsChildren)} */}
                     {selected.godSelected1 === null ? (
                       godsChildren.map((child, index) => (
                         <GodButton
