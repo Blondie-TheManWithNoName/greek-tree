@@ -1,6 +1,15 @@
 import axios from "axios";
 
-export const fetchGodInfo = async (p1, p2, setGodInfo) => {
+export const fetchGodInfo = async (name, setGodInfo) => {
+  try {
+    const response = await axios.get("http://127.0.0.1:4005/api/gods/" + name);
+    setGodInfo(response.data);
+  } catch (error) {
+    // setError(error.message);
+  }
+};
+
+export const fetchGodChildren = async (p1, p2, setGodInfo) => {
   try {
     const response = await axios.get(
       "http://127.0.0.1:4005/api/gods/children/" + p1 + "&" + p2

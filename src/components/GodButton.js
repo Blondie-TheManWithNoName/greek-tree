@@ -1,15 +1,7 @@
 import Style from "./GodButton.module.css";
 import React, { useEffect, useState } from "react";
 
-const GodButton = ({
-  key,
-  name,
-  style,
-  isActive,
-  handleClick,
-  index,
-  isSelected,
-}) => {
+const GodButton = ({ id, name, style, handleClick, index, isSelected }) => {
   const [selectedButton, setSelectedButton] = useState(isSelected);
 
   useEffect(() => {
@@ -23,22 +15,15 @@ const GodButton = ({
 
   return (
     <>
-      <label htmlFor={key}>
+      <label htmlFor={id}>
         <input
           type="checkbox"
-          id={key}
+          id={id}
           className={Style.check}
           onChange={handleSelect}
           checked={selectedButton}
         />
-        <span
-          className={`${Style.dot}${
-            isActive || selectedButton
-              ? ` ${Style.active}`
-              : ` ${Style.deactive}`
-          }`}
-          style={style}
-        >
+        <span className={`${Style.dot}`} style={style}>
           {name}
         </span>
       </label>

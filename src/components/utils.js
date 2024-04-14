@@ -49,8 +49,4 @@ export const styleBtn = {
       zIndex: "1",
     };
   },
-
-  partnerOut: {
-    opacity: 0,
-  },
 };

@@ -1,34 +1,35 @@
 import React from "react";
 import Styles from "./GodDescription.module.css";
 
-const GodDescription = ({ twoSelected }) => {
+const GodDescription = ({ godInfo }) => {
   return (
-    <article
-      className={Styles.godArticle}
-      style={
-        twoSelected ? { display: "none", pointerEvents: 0 } : { display: 1 }
-      }
-    >
+    <article className={Styles.godArticle}>
       <header className={Styles.godArticleHeader}>
         <span className={Styles.nameContainer}>
-          <p>Greek Name</p>
-          <p>Hola</p>
+          <p style={{ userSelect: "none" }}>Greek Name</p>
+          <p>{godInfo?.greek_name}</p>
         </span>
         <span className={Styles.nameContainer}>
-          <p>Roman Name</p>
-          <p>Hola</p>
+          <p style={{ userSelect: "none" }}>Roman Name</p>
+          <p>{godInfo?.roman_name}</p>
         </span>
         <span className={Styles.nameContainer}>
-          <p>Translation</p>
-          <p>Hola</p>
+          <p style={{ userSelect: "none" }}>Translation</p>
+          <p>{godInfo?.translation_name}</p>
         </span>
       </header>
       <p className={Styles.nameDescription}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias
-        quidem omnis laudantium odit? Porro, in placeat? Totam ducimus
-        doloremque, consequuntur fugit impedit vero! Numquam dolorum, enim et,
-        hic laboriosam natus aliquid nobis libero maxime exercitationem nulla
-        illum ex animi sit?
+        {godInfo?.description ? (
+          godInfo?.description
+        ) : (
+          <>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias
+            quidem omnis laudantium odit? Porro, in placeat? Totam ducimus
+            doloremque, consequuntur fugit impedit vero! Numquam dolorum, enim
+            et, hic laboriosam natus aliquid nobis libero maxime exercitationem
+            nulla illum ex animi sit?
+          </>
+        )}
       </p>
     </article>
   );
