@@ -1,7 +1,7 @@
 import Style from "./GodButton.module.css";
 import React, { useEffect, useState } from "react";
 
-const GodButton = ({ key, name, style, handleClick, index, isSelected }) => {
+const GodButton = ({ id, name, style, handleClick, index, isSelected }) => {
   const [selectedButton, setSelectedButton] = useState(isSelected);
 
   useEffect(() => {
@@ -15,10 +15,10 @@ const GodButton = ({ key, name, style, handleClick, index, isSelected }) => {
 
   return (
     <>
-      <label htmlFor={key}>
+      <label htmlFor={id}>
         <input
           type="checkbox"
-          id={key}
+          id={id}
           className={Style.check}
           onChange={handleSelect}
           checked={selectedButton}

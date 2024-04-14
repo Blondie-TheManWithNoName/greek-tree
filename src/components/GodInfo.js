@@ -23,6 +23,8 @@ const GodInfo = ({
 }) => {
   // const [error, setError] = useState(null); TO DO
 
+  console.log(p1, p2, s1, s2, desc);
+
   // Stores parents of current children or selected god
   const [parents, setParents] = useState({
     parent1: p1,
@@ -185,6 +187,7 @@ const GodInfo = ({
                 <div className={Style.info}>
                   <GodButton
                     key={selected.godSelected1}
+                    id={selected.godSelected1}
                     name={selected.godSelected1}
                     index={0}
                     isActive={true}
@@ -195,6 +198,7 @@ const GodInfo = ({
 
                   <GodButton
                     key={selected.godSelected2}
+                    id={selected.godSelected2}
                     name={selected.godSelected2}
                     index={1}
                     isActive={true}
@@ -211,6 +215,7 @@ const GodInfo = ({
                       godsChildren.map((child, index) => (
                         <GodButton
                           key={child + "_child"}
+                          id={child + "_child"}
                           name={child}
                           index={index}
                           total={godsChildren.length}
@@ -226,6 +231,7 @@ const GodInfo = ({
                     ) : (
                       <GodButton
                         key={selected.godSelected1 + "_main"}
+                        id={selected.godSelected1 + "_main"}
                         name={selected.godSelected1}
                         index={0}
                         total={godsChildren.length}
@@ -238,6 +244,7 @@ const GodInfo = ({
                       {godPartners?.partners.map((partner, index) => (
                         <GodButton
                           key={partner + "_partner"}
+                          id={partner + "_partner"}
                           name={partner}
                           index={index}
                           handleClick={onClickPartner}

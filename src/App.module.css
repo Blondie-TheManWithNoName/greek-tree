@@ -5,11 +5,14 @@
 }
 
 .Header {
-  height: 10vh;
+  height: 15vh;
   /* background-color: #cfdee7; */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* background-color: #35465f; */
+  background-color: #539cea;
 }
 
 .Main {
@@ -18,9 +21,29 @@
 }
 
 .Title {
-  color: #35465f;
+  /* color: #35465f; */
+  color: #fdfdfc;
+
   font-size: 3rem;
-  letter-spacing: 0.75rem;
+  letter-spacing: 0.5rem;
+  text-align: center;
+  justify-content: center;
+  font-family: Romanica;
+  font-weight: 500;
+  font-style: normal;
+  text-shadow: 0.75px 0 0 #1466b8, -0.75px 0 0 #1466b8;
+  /* text-shadow: 3px 0px 10px #35465f; */
+}
+
+.SubTitle {
+  color: #fdfdfc;
+  /* text-shadow: 0.5px 0 0 #082949, -0.5px 0 0 #082949; */
+  text-shadow: 0.5px 0 0 #1466b8, -0.5px 0 0 #1466b8;
+
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  margin-top: 0.2rem;
   text-align: center;
   justify-content: center;
   font-family: Romanica;
@@ -32,7 +55,7 @@
   scale: 0.2;
   position: absolute;
   right: 50%;
-  rotate: 2deg;
+  rotate: 5deg;
 }
 
 .HandRight {
@@ -40,4 +63,25 @@
   position: absolute;
   left: 50%;
   rotate: -3deg;
+}
+
+.Divider svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.Divider svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 58px;
+}
+
+.Divider .Fill {
+  fill: #539cea;
 }
