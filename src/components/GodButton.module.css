@@ -22,10 +22,10 @@
 
 .check:checked ~ .dot {
   /* background-color: #4e617e; */
-  background-color: #539cea;
+  background-color: #4f6978;
   color: #fdfdfc;
   border: 0;
-  text-shadow: 0.5px 0 0 #1466b8, -0.5px 0 0 #1466b8;
+  /* text-shadow: 0.5px 0 0 #1466b8, -0.5px 0 0 #1466b8; */
   /* color: #cfdee7; */
 }
 

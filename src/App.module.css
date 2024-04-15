@@ -13,11 +13,19 @@
   align-items: center;
   /* background-color: #35465f; */
   background-color: #539cea;
+  /* background-image: radial-gradient(
+    circle at 50% 50%,
+    #3c7fc7,
+    #539cea,
+    #b6d5f6
+  ); */
 }
 
 .Main {
   display: flex;
+  align-items: center;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .Title {

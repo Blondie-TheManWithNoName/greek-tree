@@ -9,27 +9,47 @@ export const fetchGodInfo = async (name, setGodInfo) => {
   }
 };
 
-export const fetchGodChildren = async (p1, p2, setGodInfo) => {
+export const fetchGodChildren = async (
+  p1,
+  p2,
+  gods,
+  setGods,
+  setChildrenNum
+) => {
   try {
     const response = await axios.get(
       "http://127.0.0.1:4005/api/gods/children/" + p1 + "&" + p2
     );
-    setGodInfo(response.data);
+    setChildrenNum(response.data.length);
+    const children = response.data.map((child) => ({
+      name: child,
+      state: "child",
+    }));
+    setGods(children);
   } catch (error) {
     // setError(error.message);
   }
 };
 
-export const fetchGodPartners = async (name, setGodPartners) => {
+export const fetchGodPartners = async (name, gods, setGods) => {
   try {
     const response = await axios.get("http://127.0.0.1:4005/api/gods/" + name);
-    setGodPartners(response.data);
+    // setChildrenNum(response.data.length);
+
+    const partners = response.data.partners.map((partner) => ({
+      name: partner,
+      state: "partner",
+    }));
+    // const mainGod = gods.filter((god) => god.name === name);
+    // mainGod[0].state = "main";
+    // console.log(main.)
+    setGods([...gods, ...partners]);
   } catch (error) {
     // setError(error.message);
   }
 };
 
-export const fetchGodParents = async (name, parents, setParents) => {
+export const fetchGodParents = async (name, parents, setGods) => {
   try {
     const response = await axios.get(
       "http://127.0.0.1:4005/api/gods/parents/" + name
@@ -40,7 +60,7 @@ export const fetchGodParents = async (name, parents, setParents) => {
         parents.parent2 === response.data[0].parent2
       )
     ) {
-      setParents({
+      setGods({
         parent1: response.data[0].parent1,
         parent2: response.data[0].parent2,
       });

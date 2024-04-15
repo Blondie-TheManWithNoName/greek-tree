@@ -6,10 +6,21 @@
   position: relative;
   /* height: 50vh; */
   height: 36vh;
+  width: 36vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  /* overflow: hidden; */
+}
+
+.desc {
+  position: relative;
+  /* height: 50vh; */
+  height: 36vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* overflow: hidden; */
 }
 
 .god {

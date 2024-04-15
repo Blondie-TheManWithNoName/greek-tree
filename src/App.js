@@ -28,46 +28,43 @@ function App() {
   }, [godStatus2]);
 
   useEffect(() => {
-    if (childClick.child !== null) {
-      // console.log("childClick", childClick);
-
-      setGodStatus1({
-        p1: childClick.parents.parent1,
-        p2: childClick.parents.parent2,
-        s1: childClick.child,
-        s2: null,
-        desc: false,
-      });
-
-      setGodStatus2({
-        p1: null,
-        p2: null,
-        s1: childClick.child,
-        s2: null,
-        desc: true,
-      });
-    }
+    // if (childClick.child !== null) {
+    //   // console.log("childClick", childClick);
+    //   setGodStatus1({
+    //     p1: childClick.parents.parent1,
+    //     p2: childClick.parents.parent2,
+    //     s1: childClick.child,
+    //     s2: null,
+    //     desc: false,
+    //   });
+    //   setGodStatus2({
+    //     p1: null,
+    //     p2: null,
+    //     s1: childClick.child,
+    //     s2: null,
+    //     desc: true,
+    //   });
+    // }
   }, [childClick]);
 
   useEffect(() => {
-    if (mainClick !== null) {
-      // console.log("mainClick", mainClick);
-      setGodStatus1({
-        p1: mainClick.parent1,
-        p2: mainClick.parent2,
-        s1: mainClick.parent1,
-        s2: mainClick.parent2,
-        desc: false,
-      });
-
-      setGodStatus2({
-        p1: mainClick.parent1,
-        p2: mainClick.parent2,
-        s1: null,
-        s2: null,
-        desc: false,
-      });
-    }
+    // if (mainClick !== null) {
+    //   // console.log("mainClick", mainClick);
+    //   setGodStatus1({
+    //     p1: mainClick.parent1,
+    //     p2: mainClick.parent2,
+    //     s1: mainClick.parent1,
+    //     s2: mainClick.parent2,
+    //     desc: false,
+    //   });
+    //   setGodStatus2({
+    //     p1: mainClick.parent1,
+    //     p2: mainClick.parent2,
+    //     s1: null,
+    //     s2: null,
+    //     desc: false,
+    //   });
+    // }
   }, [mainClick]);
 
   return (
@@ -92,7 +89,7 @@ function App() {
       </div>
       <main className={Style.Main}>
         {/* <GodInfo p1="Kronos" p2="Rhea" shift={0} setGodStatus={setGodStatus} /> */}
-        <GodInfo
+        {/* <GodInfo
           p1={godStatus1.p1}
           p2={godStatus1.p2}
           s1={godStatus1.s1}
@@ -102,7 +99,7 @@ function App() {
           setGodStatus={setGodStatus2}
           setChildClick={setChildClick}
           setMainClick={setMainClick}
-        />
+        /> */}
         <GodInfo
           p1={godStatus2.p1}
           p2={godStatus2.p2}

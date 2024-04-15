@@ -31,22 +31,29 @@ export const styleBtn = {
     top: "calc(50% - 1rem)",
     zIndex: "1",
   }),
-  godPartner: (index, sign) => {
+  godPartner: (index, sign, active) => {
     const { x, y, angle } = calPosPartner(index, sign);
+
     return {
       left: `calc(${x}% - 3.5rem)`,
       top: `calc(${y}% - 1rem)`,
       rotate: `${angle}rad`,
       zIndex: "2",
+      opacity: active ? 1 : 0,
+      pointerEvents: active ? "auto" : "none",
+      transition: "left 0s, opacity 500ms",
     };
   },
-  godChild: (index, total, shift) => {
+  godChild: (index, total, shift, active) => {
     return {
       left: `calc(${50}% + ${index * 9}rem - ${
         (total * 7 + (total - 1) * 2) / 2 + shift
       }rem)`,
       top: `calc(50% - 1rem)`,
       zIndex: "1",
+      opacity: active ? 1 : 0,
+      pointerEvents: active ? "auto" : "none",
+      // transition: "left 0s, opacity 0ms",
     };
   },
 };
