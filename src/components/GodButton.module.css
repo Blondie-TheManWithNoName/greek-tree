@@ -1,29 +1,50 @@
 .dot {
   position: absolute;
   text-transform: uppercase;
-  border-radius: 2rem;
+  /* border-radius: 2rem; */
   cursor: pointer;
-  border: 0.1rem solid #3d567b;
-  color: #3d567b;
+  /* border: 0.1rem solid #b1c2d8; */
+  /* color: #4b6b95; */
+  color: #3a577e;
+  overflow: hidden;
   background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 7rem;
+  width: 7.5rem;
   height: 2.15rem;
-  font-weight: 500;
-
-  transition: all 500ms ease-out;
+  /* font-weight: 200; */
 }
 
-.dot:hover {
-  background-color: #cfdee7;
+svg {
+  transition: all 500ms;
+}
+
+.dot:hover svg path {
+  fill: #aabfda;
+  /* fill: #cfdee7; */
+  /* background-color: #cfdee7; */
+}
+.dot > svg {
+  position: absolute;
+  fill: none;
+  scale: 1.5;
+}
+
+.text {
+  z-index: 1;
+}
+
+.check:checked ~ .dot svg path {
+  fill: #b1c4dd;
 }
 
 .check:checked ~ .dot {
-  /* background-color: #4e617e; */
-  background-color: #4f6978;
-  color: #fdfdfc;
+  /* background-color: #b1c2d8; */
+  /* background-color: #4f6978; */
+  /* color: #10467f; */
+  /* color: #fdfdfc; */
+
   border: 0;
   /* text-shadow: 0.5px 0 0 #1466b8, -0.5px 0 0 #1466b8; */
   /* color: #cfdee7; */

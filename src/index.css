@@ -16,6 +16,11 @@
 }
 
 @font-face {
+  font-family: AileronSemi;
+  src: url(assets/fonts/Aileron-SemiBold.otf);
+}
+
+@font-face {
   font-family: Trajan;
   src: url(assets/fonts/Trajan.ttf);
 }

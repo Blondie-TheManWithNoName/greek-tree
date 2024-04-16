@@ -40,50 +40,21 @@ const GodInfo = ({
 
   useEffect(() => {
     if (gods !== null) {
-      // if (
-      //   gods.length === 2 &&
-      //   (gods[0].state === "partner1" || gods[1].state === "partner1")
-      // ) {
-      //   setTimeout(() => {
-      //     setGods([
-      //       { name: gods[0].name, state: "parent" },
-      //       { name: gods[1].name, state: "parent" },
-      //     ]);
-      //   }, 500);
-      // } else {
-      //   const indexOfPartner2 = gods.findIndex(
-      //     (god) => god.state === "partner2"
-      //   );
-      //   console.log("indexOfPartner2", indexOfPartner2);
-      //   // If a god with state === "partner2" is found, update its state to "partner"
-      //   if (indexOfPartner2 !== -1) {
-      //     const updatedGods = [...gods]; // Create a copy of the gods array
-      //     updatedGods[indexOfPartner2].state = "partner"; // Update the state of the god
-      //     setTimeout(() => {
-      //       setGods(updatedGods); // Update the state with the modified array
-      //     }, 500);
-      //   }
-      // }
-
-      const indexOfPartner2 = gods.findIndex((god) => god.state === "main2");
-      // If a god with state === "partner2" is found, update its state to "partner"
-      if (indexOfPartner2 !== -1) {
-        const updatedGods = [...gods]; // Create a copy of the gods array
-        updatedGods[indexOfPartner2].state = "main"; // Update the state of the god
+      const indexMainIn = gods.findIndex((god) => god.state === "main_in");
+      if (indexMainIn !== -1) {
+        const updatedGods = [...gods];
+        updatedGods[indexMainIn].state = "main";
         setTimeout(() => {
-          setGods(updatedGods); // Update the state with the modified array
+          setGods(updatedGods);
         }, 500);
       }
 
-      const indexOfPartnerOut = gods.findIndex(
-        (god) => god.state === "main_out"
-      );
-      // If a god with state === "partner2" is found, update its state to "partner"
-      if (indexOfPartnerOut !== -1) {
-        const updatedGods = [...gods]; // Create a copy of the gods array
-        updatedGods[indexOfPartnerOut].state = "child"; // Update the state of the god
+      const indexMainOut = gods.findIndex((god) => god.state === "main_out");
+      if (indexMainOut !== -1) {
+        const updatedGods = [...gods];
+        updatedGods[indexMainOut].state = "child";
         setTimeout(() => {
-          setGods(updatedGods); // Update the state with the modified array
+          setGods(updatedGods);
         }, 500);
       }
     }
@@ -95,9 +66,6 @@ const GodInfo = ({
   // Stores array with children of god p1 and p2
   const [childrenNum, setChildrenNum] = useState(0);
   const [partnersNum, setPartnersNum] = useState(0);
-
-  // Stores array with partners of current selected god
-  const [godPartners, setGodPartners] = useState(null);
 
   // Bool to either mirror parents or no
   const [mirrorPartners, setMirrorPartners] = useState(false);
@@ -114,21 +82,6 @@ const GodInfo = ({
     );
   }, [parents]);
 
-  useEffect(() => {}, [shiftPercentage]);
-
-  useEffect(() => {
-    if (prevPartner.name !== null && godPartners !== null) {
-      const newIndex = godPartners.partners?.findIndex(
-        (element) => element === prevPartner.name
-      );
-      if (prevPartner.right) {
-        newIndex % 2 === 0 ? setMirrorPartners(true) : setMirrorPartners(false);
-      } else {
-        newIndex % 2 === 0 ? setMirrorPartners(false) : setMirrorPartners(true);
-      }
-    }
-  }, [godPartners]);
-
   const handleClick = (index, name, state) => {
     if (state === "child") return onClickChild(index);
     else if (state === "main") return onClickMain(index);
@@ -137,13 +90,11 @@ const GodInfo = ({
   };
   const onClickChild = (index) => {
     // setChildClick({ child: godsChildren[index], parents: parents });
-    window.scrollTo(0, 100);
     setShiftPercentage(
       3.5 + index * 9 - (childrenNum * 7 + (childrenNum - 1) * 2) / 2
     );
     // setGodStatus({ p1: null, p2: null, desc: true, s1: null, s2: null });
 
-    // setSelected({ godSelected1: gods[index].name, godSelected2: null });
     fetchGodPartners(gods[index].name, index, gods, setGods);
     setActiveChildren(false);
 
@@ -151,7 +102,7 @@ const GodInfo = ({
       setActivePartners(true);
     }, 500);
 
-    return [styleBtn.godMain, "main"];
+    return "main";
   };
 
   const onClickMain = (index) => {
@@ -166,7 +117,7 @@ const GodInfo = ({
     setPrevPartner({ name: null, right: false });
     setMirrorPartners(false);
     // setGodStatus({ p1: null, p2: null, desc: false, s1: null, s2: null });
-    return [styleBtn.godChild(index, childrenNum, 0, activeChildren), "child"];
+    return "child";
   };
 
   const onClickPartner = (index) => {
@@ -197,8 +148,7 @@ const GodInfo = ({
         ]);
       }
     }
-    setGodPartners(null);
-    return [styleBtn.godParent(index), "partner1"];
+    return "partner";
   };
 
   const onClickParent = (index, name) => {
@@ -217,33 +167,7 @@ const GodInfo = ({
     );
 
     setGodStatus({ p1: null, p2: null, desc: true, s1: null, s2: null });
-    // if (name === gods[0].name) {
-    //   setPrevPartner({ name: name, right: false });
-
-    //   setGods([
-    //     {
-    //       name: gods[1].name,
-    //       state: "main",
-    //     },
-    //     {
-    //       name: gods[0].name,
-    //       state: "partner",
-    //     },
-    //   ]);
-    // } else {
-    //   setPrevPartner({ name: name, right: true });
-    //   setGods([
-    //     {
-    //       name: gods[0].name,
-    //       state: "main",
-    //     },
-    //     {
-    //       name: gods[1].name,
-    //       state: "partner",
-    //     },
-    //   ]);
-    // }
-    return [styleBtn.godMain, "main"];
+    return "main";
   };
 
   function getStyle(state, index) {
@@ -254,7 +178,7 @@ const GodInfo = ({
         shiftPercentage,
         activeChildren
       );
-    } else if (state === "partner" || state === "partner2") {
+    } else if (state === "partner") {
       return styleBtn.godPartner(
         index - childrenNum,
         mirrorPartners,
@@ -262,7 +186,7 @@ const GodInfo = ({
       );
     } else if (state === "parent" || state === "partner1") {
       return index === 0 ? styleBtn.godParent(0) : styleBtn.godParent(1);
-    } else if (state === "main" || state === "main2") {
+    } else if (state === "main" || state === "main_in") {
       return styleBtn.godMain;
     }
   }
@@ -280,15 +204,13 @@ const GodInfo = ({
               <div className={Style.info}>
                 {gods.map((god, index) => {
                   var key;
-                  if (god.state === "parent" && false)
-                    key = god.name + "partner";
-                  else if (
+                  if (
                     god.state === "partner" ||
                     god.state === "parent" ||
                     god.state === "main" ||
                     god.state === "main_out"
                   )
-                    key = god.name + "partner";
+                    key = god.name + "_partner";
                   else key = god.name;
                   return (
                     <GodButton

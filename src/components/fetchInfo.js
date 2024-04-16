@@ -14,8 +14,7 @@ export const fetchGodChildren = async (
   p2,
   gods,
   setGods,
-  setChildrenNum,
-  selected
+  setChildrenNum
 ) => {
   try {
     const response = await axios.get(
@@ -118,7 +117,7 @@ export const fetchGodPartners = async (name, index, gods, setGods) => {
     }));
     // const mainGod = gods.filter((god) => god.name === name);
     const updatedGods = [...gods]; // Create a copy of gods array
-    updatedGods[index] = { ...updatedGods[index], state: "main2" }; // Update the specific element
+    updatedGods[index] = { ...updatedGods[index], state: "main_in" }; // Update the specific element
     setGods(updatedGods);
     // mainGod[0].state = "main";
     // console.log(main.)
