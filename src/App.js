@@ -78,12 +78,22 @@ function App() {
         <svg
           data-name="Layer 1"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
+          viewBox="0 0 1200 800"
           preserveAspectRatio="none"
+          // stroke="black"
+          // strokeWidth={"1rem"}
         >
+          <defs>
+            <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="hsla(60, 20%, 99%, 1)" />
+              <stop offset="41%" stopColor="hsla(211, 78%, 62%, 1)" />
+              <stop offset="59%" stopColor="hsla(211, 78%, 62%, 1)" />
+              <stop offset="100%" stopColor="hsla(60, 20%, 99%, 1)" />
+            </linearGradient>
+          </defs>
           <path
-            d="M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z"
-            className={Style.Fill}
+            d="M0 0L0 800L1200 800L1200 0L598.97 285.28L0 0z"
+            fill="url(#myGradient)"
           ></path>
         </svg>
       </div>

@@ -38,5 +38,6 @@ code {
 }
 
 hr {
-  width: 20rem;
+  width: 18rem;
+  z-index: 1;
 }

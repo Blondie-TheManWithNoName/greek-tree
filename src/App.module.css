@@ -12,7 +12,7 @@
   justify-content: center;
   align-items: center;
   /* background-color: #35465f; */
-  background-color: #539cea;
+  /* background-color: #539cea; */
   /* background-image: radial-gradient(
     circle at 50% 50%,
     #3c7fc7,
@@ -33,7 +33,7 @@
   color: #fdfdfc;
 
   font-size: 3rem;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.15rem;
   text-align: center;
   justify-content: center;
   font-family: Romanica;
@@ -41,6 +41,7 @@
   font-style: normal;
   text-shadow: 0.75px 0 0 #1466b8, -0.75px 0 0 #1466b8;
   /* text-shadow: 3px 0px 10px #35465f; */
+  z-index: 1;
 }
 
 .SubTitle {
@@ -56,24 +57,12 @@
   justify-content: center;
   font-family: Romanica;
   font-weight: 500;
+  z-index: 1;
+
   font-style: normal;
 }
 
-.HandLeft {
-  scale: 0.2;
-  position: absolute;
-  right: 50%;
-  rotate: 5deg;
-}
-
-.HandRight {
-  scale: 0.2;
-  position: absolute;
-  left: 50%;
-  rotate: -3deg;
-}
-
-.Divider svg {
+.Divider {
   position: absolute;
   top: 0;
   left: 0;
@@ -81,15 +70,17 @@
   overflow: hidden;
   line-height: 0;
   transform: rotate(180deg);
+  z-index: 0;
 }
 
 .Divider svg {
   position: relative;
   display: block;
   width: 100%;
-  height: 58px;
+  height: 200px;
 }
 
 .Divider .Fill {
-  fill: #539cea;
+  /* fill: #539cea; */
+  /* fill: red; */
 }
