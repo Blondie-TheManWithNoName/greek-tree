@@ -85,10 +85,10 @@ function App() {
         >
           <defs>
             <linearGradient id="myGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="hsla(60, 20%, 99%, 1)" />
-              <stop offset="41%" stopColor="hsla(211, 78%, 62%, 1)" />
-              <stop offset="59%" stopColor="hsla(211, 78%, 62%, 1)" />
-              <stop offset="100%" stopColor="hsla(60, 20%, 99%, 1)" />
+              <stop offset="0%" stopColor="#DBEAFB" />
+              <stop offset="41%" stopColor="#378CE6" />
+              <stop offset="59%" stopColor="#378CE6" />
+              <stop offset="100%" stopColor="#DBEAFB" />
             </linearGradient>
           </defs>
           <path

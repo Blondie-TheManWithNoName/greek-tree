@@ -39,7 +39,9 @@ export const fetchGodChildrenAndPartners = async (
   setGods,
   setChildrenNum,
   selected,
-  setShiftPercentage
+  setShiftPercentage,
+  setMirrorPartners,
+  unselected
 ) => {
   try {
     const responseChild = await axios.get(
@@ -51,10 +53,32 @@ export const fetchGodChildrenAndPartners = async (
     );
     // setChildrenNum(response.data.length);
 
-    const partners = responsePart.data.partners.map((partner) => ({
-      name: partner,
-      state: "partner",
-    }));
+    const partners = responsePart.data.partners
+      .map((partner, index) => {
+        if (gods[unselected].name === partner) {
+          if (unselected === 0) {
+            index % 2 === 0
+              ? setMirrorPartners(false)
+              : setMirrorPartners(true);
+          } else {
+            index % 2 === 0
+              ? setMirrorPartners(true)
+              : setMirrorPartners(false);
+          }
+          // gods[unselected].state = "partner2";
+          return {
+            name: partner,
+            state: "partner",
+          };
+        } else {
+          return {
+            name: partner,
+            state: "partner",
+          };
+        }
+      })
+      .filter((partner) => partner !== null);
+
     const children = responseChild.data
       .map((child, index) => {
         if (selected !== null && selected === child) {
@@ -76,14 +100,14 @@ export const fetchGodChildrenAndPartners = async (
         };
       })
       .filter((child) => child !== null);
-    console.log("fetchGodChildren!!!!!!", children);
+
     setGods([...children, ...partners]);
   } catch (error) {
     // setError(error.message);
   }
 };
 
-export const fetchGodPartners = async (name, gods, setGods) => {
+export const fetchGodPartners = async (name, index, gods, setGods) => {
   try {
     const response = await axios.get("http://127.0.0.1:4005/api/gods/" + name);
     // setChildrenNum(response.data.length);
@@ -93,10 +117,12 @@ export const fetchGodPartners = async (name, gods, setGods) => {
       state: "partner",
     }));
     // const mainGod = gods.filter((god) => god.name === name);
-
+    const updatedGods = [...gods]; // Create a copy of gods array
+    updatedGods[index] = { ...updatedGods[index], state: "main2" }; // Update the specific element
+    setGods(updatedGods);
     // mainGod[0].state = "main";
     // console.log(main.)
-    setGods([...gods, ...partners]);
+    setGods([...updatedGods, ...partners]);
   } catch (error) {
     // setError(error.message);
   }

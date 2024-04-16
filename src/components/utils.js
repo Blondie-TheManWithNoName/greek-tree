@@ -41,7 +41,7 @@ export const styleBtn = {
       zIndex: "2",
       opacity: active ? 1 : 0,
       pointerEvents: active ? "auto" : "none",
-      transition: "left 0s, opacity 500ms",
+      // transition: "left 0s, opacity 500ms",
     };
   },
   godChild: (index, total, shift, active) => {
