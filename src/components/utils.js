@@ -3,13 +3,13 @@ function calPosPartner(index, sign) {
   const centerX = 50; // X-coordinate of the center of the semicircle
   const centerY = 50;
   if ((index % 2 === 0 && !sign) || (index % 2 !== 0 && sign)) {
-    const angleIncrement = Math.PI / 20; // Increment angle for each element
+    const angleIncrement = Math.PI / 16; // Increment angle for each element
     const angle = angleIncrement * (index - 1 * sign);
     const x = centerX - radius * Math.cos(angle);
     const y = centerY - radius * Math.sin(angle);
     return { x, y, angle };
   } else {
-    const angleIncrement = -Math.PI / 20; // Decrement angle for each element (counterclockwise)
+    const angleIncrement = -Math.PI / 16; // Decrement angle for each element (counterclockwise)
     const angle = angleIncrement * (index - 1 * !sign);
     const x = centerX + radius * Math.cos(angle);
     const y = centerY + radius * Math.sin(angle);

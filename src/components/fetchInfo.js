@@ -43,8 +43,16 @@ export const fetchGodChildrenAndPartners = async (
   unselected
 ) => {
   try {
+    const responseParents = await axios.get(
+      "http://127.0.0.1:4005/api/gods/parents/" + selected
+    );
+
+    console.log("responseParents", responseParents);
     const responseChild = await axios.get(
-      "http://127.0.0.1:4005/api/gods/children/" + p1 + "&" + p2
+      "http://127.0.0.1:4005/api/gods/children/" +
+        responseParents.data[0].parent1 +
+        "&" +
+        responseParents.data[0].parent2
     );
     setChildrenNum(responseChild.data.length);
     const responsePart = await axios.get(

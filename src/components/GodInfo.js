@@ -94,19 +94,21 @@ const GodInfo = ({
       3.5 + index * 9 - (childrenNum * 7 + (childrenNum - 1) * 2) / 2
     );
     // setGodStatus({ p1: null, p2: null, desc: true, s1: null, s2: null });
-
+    window.scrollTo({ top: 300, behavior: "smooth" });
     fetchGodPartners(gods[index].name, index, gods, setGods);
     setActiveChildren(false);
 
     setTimeout(() => {
       setActivePartners(true);
-    }, 500);
+    }, 400);
 
     return "main";
   };
 
   const onClickMain = (index) => {
+    setActivePartners(false);
     setMainClick(parents);
+    window.scrollTo({ top: 0, behavior: "smooth" });
     setActiveChildren(true);
     const updatedGods = [...gods]; // Create a copy of gods array
     updatedGods[index] = { ...updatedGods[index], state: "main_out" }; // Update the specific element
@@ -202,6 +204,7 @@ const GodInfo = ({
           ) : (
             <>
               <div className={Style.info}>
+                {console.log("GODS", gods)}
                 {gods.map((god, index) => {
                   var key;
                   if (

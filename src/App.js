@@ -24,6 +24,7 @@ function App() {
   const [mainClick, setMainClick] = useState(null);
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     // console.log("godStatus2", godStatus2);
   }, [godStatus2]);
 
@@ -70,7 +71,7 @@ function App() {
   return (
     <div className={Style.App}>
       <header className={Style.Header}>
-        <h1 className={Style.Title}>THEOGONY</h1>
+        <h1 className={Style.Title}>THΣOGONY</h1>
         <hr />
         <h2 className={Style.SubTitle}>Greek Gods Bloodline</h2>
       </header>
@@ -98,17 +99,17 @@ function App() {
       </div>
       <main className={Style.Main}>
         {/* <GodInfo p1="Kronos" p2="Rhea" shift={0} setGodStatus={setGodStatus} /> */}
-        {/* <GodInfo
+        <GodInfo
           p1={godStatus1.p1}
           p2={godStatus1.p2}
           s1={godStatus1.s1}
           s2={godStatus1.s2}
-          desc={godStatus1.desc}
+          desc={true}
           shift={0}
           setGodStatus={setGodStatus2}
           setChildClick={setChildClick}
           setMainClick={setMainClick}
-        /> */}
+        />
         <GodInfo
           p1={godStatus2.p1}
           p2={godStatus2.p2}
@@ -117,6 +118,50 @@ function App() {
           desc={godStatus2.desc}
           shift={0}
           setGodStatus={setGodStatus1}
+          setChildClick={setChildClick}
+          setMainClick={setMainClick}
+        />
+        <GodInfo
+          p1={godStatus1.p1}
+          p2={godStatus1.p2}
+          s1={godStatus1.s1}
+          s2={godStatus1.s2}
+          desc={true}
+          shift={0}
+          setGodStatus={setGodStatus2}
+          setChildClick={setChildClick}
+          setMainClick={setMainClick}
+        />
+        <GodInfo
+          p1={godStatus1.p1}
+          p2={godStatus1.p2}
+          s1={godStatus1.s1}
+          s2={godStatus1.s2}
+          desc={true}
+          shift={0}
+          setGodStatus={setGodStatus2}
+          setChildClick={setChildClick}
+          setMainClick={setMainClick}
+        />
+        <GodInfo
+          p1={godStatus1.p1}
+          p2={godStatus1.p2}
+          s1={godStatus1.s1}
+          s2={godStatus1.s2}
+          desc={true}
+          shift={0}
+          setGodStatus={setGodStatus2}
+          setChildClick={setChildClick}
+          setMainClick={setMainClick}
+        />
+        <GodInfo
+          p1={godStatus1.p1}
+          p2={godStatus1.p2}
+          s1={godStatus1.s1}
+          s2={godStatus1.s2}
+          desc={true}
+          shift={0}
+          setGodStatus={setGodStatus2}
           setChildClick={setChildClick}
           setMainClick={setMainClick}
         />

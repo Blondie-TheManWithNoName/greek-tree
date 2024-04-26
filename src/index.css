@@ -25,6 +25,11 @@
   src: url(assets/fonts/Trajan.ttf);
 }
 
+@font-face {
+  font-family: MinionPro-Semibold;
+  src: url(assets/fonts/MinionPro-Semibold.otf);
+}
+
 body {
   margin: 0;
   /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -35,6 +40,7 @@ body {
   font-family: Aileron;
   font-weight: 400;
   font-style: normal;
+  overflow-y: hidden;
 }
 
 code {

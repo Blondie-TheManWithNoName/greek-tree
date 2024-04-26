@@ -69,8 +69,8 @@ const GodButton = ({
 
 "
               stroke="#AABFDA"
-              stroke-width="1"
-              stroke-linejoin="round"
+              strokeWidth="0.9"
+              strokeLinejoin="round"
             />
           </svg>
 
